@@ -1,0 +1,101 @@
+{
+  "name": "PF - Checkpoint 1 - Base Técnica",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "db9aa816-442c-4c92-97af-5a886e951adf",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "869809f9-4ee8-465a-ad8f-b5ad2a456131",
+      "name": "Webhook",
+      "webhookId": "db9aa816-442c-4c92-97af-5a886e951adf"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Eres un asistente técnico. Responde de forma breve a este mensaje: {{ $json.query.chatInput }}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        224,
+        0
+      ],
+      "id": "3a36214d-49f7-4d17-9c12-ffd3039ca745",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4o",
+          "mode": "list",
+          "cachedResultName": "gpt-4o",
+          "cachedResultUrl": ""
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        96,
+        208
+      ],
+      "id": "173ac1ec-d920-4d04-ad60-3f166e55d8bb",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": null,
+          "name": "",
+          "__aiGatewayManaged": true
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "d3acf681-963f-4976-99ab-4f443bb263c4",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "07a8a700253794cfad9deec1e875f64065f02bdb97c7c260963eae129c83596c"
+  },
+  "nodeGroups": [],
+  "id": "oGtaYTfoLLAvbFTH",
+  "tags": []
+}
